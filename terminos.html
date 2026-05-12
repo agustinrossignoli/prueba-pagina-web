@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Términos y Condiciones — Gotham Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #000;
+    --text: #fff;
+    --muted: #a3a3a3;
+    --dim: #6b6b6b;
+    --red: #dc2626;
+    --border: #262626;
+    --font: 'Manrope', system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--font); font-size: 16px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+
+.legal-header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+}
+.legal-header .wrap {
+    max-width: 720px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+}
+.legal-back {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+.legal-back:hover { color: var(--text); }
+.legal-brand {
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+main.legal {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+}
+.legal h1 {
+    font-family: var(--font);
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+.legal .lead {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 48px;
+}
+.legal h2 {
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 40px;
+    margin-bottom: 14px;
+    color: var(--text);
+}
+.legal p {
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.legal-note {
+    margin-top: 64px;
+    padding: 20px 24px;
+    border-left: 2px solid var(--red);
+    background: rgba(220, 38, 38, 0.04);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer.legal-footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    color: var(--dim);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<header class="legal-header">
+    <div class="wrap">
+        <a class="legal-back" href="index.html">← Volver al sitio</a>
+        <span class="legal-brand">Gotham Experience</span>
+    </div>
+</header>
+
+<main class="legal">
+    <h1>Términos y condiciones</h1>
+    <p class="lead">Condiciones de uso del sitio y de los eventos organizados por Gotham Experience.</p>
+
+    <h2>1. Aceptación</h2>
+    <p>El uso de este sitio implica la aceptación de estos términos. Si no estás de acuerdo, te pedimos no continuar navegando.</p>
+
+    <h2>2. Edad mínima</h2>
+    <p>El ingreso a los eventos es exclusivo para mayores de 21 años. Al adquirir una entrada, declarás cumplir con este requisito y autorizás que se te solicite identificación al ingreso.</p>
+
+    <h2>3. Entradas</h2>
+    <p>Las entradas se comercializan a través de Passline. Una vez adquiridas, no admiten devolución ni cambio, salvo cancelación del evento por parte del organizador.</p>
+
+    <h2>4. Reprogramación o cancelación</h2>
+    <p>En caso de cancelación o reprogramación, se publicará el aviso en redes oficiales con la mayor antelación posible. Las entradas mantendrán su validez para la nueva fecha.</p>
+
+    <h2>5. Conducta dentro del lugar</h2>
+    <p>Nos reservamos el derecho de admisión y permanencia. No se tolera conducta agresiva, consumo de sustancias ilegales, ni faltas de respeto al personal o a otros asistentes.</p>
+
+    <h2>6. Imagen</h2>
+    <p>Durante el evento podemos registrar fotos y video con fines de comunicación. Si no querés aparecer, avisanos al ingresar.</p>
+
+    <h2>7. Contacto</h2>
+    <p>Cualquier consulta o reclamo: <a href="mailto:experiencegotham@gmail.com" style="color: var(--text); text-decoration: underline;">experiencegotham@gmail.com</a>.</p>
+
+    <div class="legal-note">
+        Documento en preparación. La versión definitiva la firma el operador junto con el cliente antes del lanzamiento público. El texto de arriba es un placeholder estándar de la industria.
+    </div>
+</main>
+
+<footer class="legal-footer">
+    © 2026 Gotham Experience · Bariloche · +21
+</footer>
+
+</body>
+</html>

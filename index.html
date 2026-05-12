@@ -575,37 +575,47 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
 @media (min-width: 900px) {
     .pillars-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
 }
+/* Pillar — tratamiento editorial, sin look de "feature card".
+   Número grande en rojo, icono sutil, jerarquía tipográfica clara. */
 .pillar {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 44px 36px;
+    padding: 0;
     opacity: 0;
     transform: translateY(20px);
     transition:
         opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .pillar.is-visible { opacity: 1; transform: translateY(0); }
-.pillar:hover {
-    border-color: transparent;
-    box-shadow: 0 0 0 1px var(--color-primary) inset, var(--shadow-glow-primary);
-}
-.pillar-icon {
-    width: 56px; height: 56px;
-    margin-bottom: 28px;
-    color: var(--color-text);
+
+.pillar-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(56px, 6.5vw, 72px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--color-primary);
+    margin-bottom: 24px;
     transition: color 0.3s ease;
 }
-.pillar:hover .pillar-icon { color: var(--color-primary); }
+.pillar:hover .pillar-num { color: var(--color-primary-hover); }
+
+.pillar-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 28px;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+.pillar:hover .pillar-icon { color: var(--color-text); opacity: 1; }
+
 .pillar-title {
     font-family: var(--font-display);
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 800;
-    letter-spacing: -0.015em;
-    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
     line-height: 1;
 }
 .pillar-text {
@@ -613,6 +623,7 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
     font-size: 15px;
     font-weight: 400;
     line-height: 1.7;
+    max-width: 340px;
 }
 
 /* Animaciones del slot */
@@ -657,6 +668,48 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
 @keyframes pixel-flicker {
     0%, 100% { opacity: 0.3; }
     50%      { opacity: 1; }
+}
+
+/* ============================================================
+   GALERÍA — marquee horizontal infinito con fade en bordes.
+   ============================================================ */
+.galeria { position: relative; overflow: hidden; }
+.gallery-marquee {
+    margin-top: 8px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+.gallery-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: gallery-scroll 50s linear infinite;
+}
+.gallery-marquee:hover .gallery-track { animation-play-state: paused; }
+@keyframes gallery-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 8px)); }
+}
+.gallery-item {
+    flex-shrink: 0;
+    width: 320px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(220, 38, 38, 0.12) 0%, transparent 50%),
+        linear-gradient(135deg, #1a0a0a 0%, #000000 100%);
+    position: relative;
+}
+.gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+}
+@media (max-width: 720px) {
+    .gallery-item { width: 240px; }
+    .gallery-track { gap: 12px; animation-duration: 40s; }
 }
 
 /* ============================================================
@@ -801,6 +854,20 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
     color: var(--color-text-dim);
     letter-spacing: 0.06em;
 }
+.footer-legal {
+    display: flex; flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 20px;
+}
+.footer-legal a {
+    color: var(--color-text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--color-text); }
 @media (min-width: 768px) {
     .footer-inner {
         flex-direction: row;
@@ -888,7 +955,6 @@ body::after {
         <p class="hero-location">Bariloche</p>
         <div class="hero-ctas">
             <a class="btn btn-primary" href="#eventos">Ver próximos eventos</a>
-            <a class="btn btn-outline" href="https://www.passline.com" target="_blank" rel="noopener">Comprar entradas</a>
         </div>
     </div>
     <div class="hero-scroll-hint" aria-hidden="true">Scroll</div>
@@ -914,6 +980,7 @@ body::after {
         </header>
         <div class="pillars-grid">
             <article class="pillar" data-pillar="sound">
+                <span class="pillar-num">01</span>
                 <div class="pillar-icon">
                     <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
                         <rect class="wave" x="6"  y="14" width="6" height="36" rx="2"/>
@@ -927,6 +994,7 @@ body::after {
                 <p class="pillar-text">Sistema line array de última generación. Cada frecuencia donde tiene que estar, sin distorsión, sin pérdida. La diferencia entre escuchar música y sentirla.</p>
             </article>
             <article class="pillar" data-pillar="lights">
+                <span class="pillar-num">02</span>
                 <div class="pillar-icon">
                     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
                         <circle cx="32" cy="11" r="5" fill="currentColor" stroke="none"/>
@@ -939,6 +1007,7 @@ body::after {
                 <p class="pillar-text">Cabezas móviles, lasers y mapping sincronizado a cada track. Iluminación que no acompaña la música: la traduce.</p>
             </article>
             <article class="pillar" data-pillar="screens">
+                <span class="pillar-num">03</span>
                 <div class="pillar-icon">
                     <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
                         <rect class="pixel" x="6"  y="6"  width="16" height="16" rx="2"/>
@@ -955,6 +1024,35 @@ body::after {
                 <h3 class="pillar-title">Pantallas</h3>
                 <p class="pillar-text">Paredes LED de alta densidad con visuales en 4K, generados en vivo o curados por cada artista. La pista de baile como obra audiovisual.</p>
             </article>
+        </div>
+    </div>
+</section>
+
+<!-- Galería del lugar — marquee horizontal infinito.
+     Las imágenes viven en tenants/gotham/branding/venue/01.jpg ... 06.jpg
+     Si una falta, el card muestra el gradient placeholder. -->
+<section class="section galeria" id="galeria">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">El espacio</h2>
+            <p class="section-subtitle">Detrás de cada noche.</p>
+        </header>
+    </div>
+    <div class="gallery-marquee" aria-hidden="true">
+        <div class="gallery-track">
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/01.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/02.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/03.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/04.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/05.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/06.jpg" alt="" loading="lazy"></div>
+            <!-- Duplicado para loop seamless -->
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/01.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/02.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/03.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/04.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/05.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="tenants/gotham/branding/venue/06.jpg" alt="" loading="lazy"></div>
         </div>
     </div>
 </section>
@@ -1013,6 +1111,10 @@ body::after {
             <span class="footer-logo" data-logo></span>
             <span class="footer-line">Gotham Experience · Bariloche · +21</span>
         </div>
+        <nav class="footer-legal" aria-label="Legal">
+            <a href="terminos.html">Términos y condiciones</a>
+            <a href="privacidad.html">Política de privacidad</a>
+        </nav>
         <p class="footer-copy">© 2026 Gotham Experience</p>
     </div>
 </footer>
@@ -1109,8 +1211,8 @@ body::after {
 
     document.getElementById('eventos-grid').innerHTML = EVENTS.map(renderEvent).join('');
 
-    // Si el flyer image 404ea, sacarlo para que se vea el gradient placeholder.
-    document.querySelectorAll('.event-flyer-image').forEach(function (img) {
+    // Si una imagen 404ea (flyer o foto de galería), sacarla para que se vea el gradient placeholder.
+    document.querySelectorAll('.event-flyer-image, .gallery-item img').forEach(function (img) {
         img.addEventListener('error', function () { img.remove(); }, { once: true });
     });
 
