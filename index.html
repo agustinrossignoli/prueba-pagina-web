@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Gotham Experience — Bariloche</title>
+<meta name="description" content="Gotham Experience: experiencias electrónicas premium en Bariloche.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS — paleta rojo + negro (sin magenta, sin naranja).
+   ============================================================ */
+:root {
+    /* Negro pleno para matchear el fondo del logo de Gotham */
+    --color-bg: #000000;
+    --color-bg-elevated: #121212;
+    --color-bg-input: #1a1a1a;
+
+    --color-text: #ffffff;
+    --color-text-muted: #a3a3a3;
+    --color-text-dim: #6b6b6b;
+
+    /* Rojo Gotham */
+    --color-primary: #dc2626;          /* red-600 */
+    --color-primary-hover: #ef4444;    /* red-500 más claro */
+    --color-primary-deep: #991b1b;     /* red-800 para depth */
+    --color-accent: #dc2626;
+    --color-accent-hover: #ef4444;
+
+    --gradient-brand: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+
+    --color-danger: #dc2626;
+    --color-border: #262626;
+    --color-border-elevated: #404040;
+
+    --shadow-glow-primary: 0 0 32px rgba(220, 38, 38, 0.5);
+
+    --font-sans:    'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: var(--font-sans);
+    --font-body:    var(--font-sans);
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 999px;
+
+    --header-h: 72px;
+    --container-max: 1200px;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; background: none; border: 0; color: inherit; }
+
+*:focus { outline: none; }
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+::selection { background: var(--color-primary); color: #fff; }
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+@media (min-width: 768px) { .container { padding: 0 40px; } }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex; align-items: center;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+.site-header.scrolled {
+    background: rgba(10, 10, 10, 0.78);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom-color: var(--color-border);
+}
+.header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; width: 100%;
+}
+.brand { display: inline-flex; align-items: center; line-height: 1; }
+.brand-logo {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+.nav-desktop { display: none; align-items: center; gap: 40px; }
+.nav-desktop a {
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    transition: color 0.2s ease;
+}
+.nav-desktop a:hover { color: var(--color-text); }
+
+.nav-ig {
+    width: 36px; height: 36px;
+    display: inline-flex !important; align-items: center; justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text) !important;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.nav-ig:hover { background: var(--color-primary); border-color: transparent; transform: translateY(-1px); }
+.nav-ig svg { width: 16px; height: 16px; }
+
+.nav-toggle {
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+@media (min-width: 900px) {
+    .nav-desktop { display: flex; }
+    .nav-toggle { display: none; }
+}
+
+.mobile-menu {
+    position: fixed; inset: 0;
+    z-index: 99;
+    background: var(--color-bg);
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    gap: 32px;
+    padding: var(--header-h) 24px 40px;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 8vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--color-primary); }
+@media (min-width: 900px) { .mobile-menu { display: none; } }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
+    padding: 15px 30px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+                background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    white-space: nowrap;
+}
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-primary);
+}
+.btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.22);
+    color: var(--color-text);
+}
+.btn-outline:hover {
+    border-color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+.btn-disabled {
+    background: var(--color-bg-input);
+    color: var(--color-text-dim);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: calc(var(--header-h) + 40px) 0 100px;
+}
+.hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+.hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+.hero-glow-1 {
+    width: 900px; height: 600px;
+    top: 50%; left: 50%; margin-left: -450px; margin-top: -340px;
+    background: radial-gradient(ellipse,
+        rgba(220, 38, 38, 0.55) 0%,
+        rgba(220, 38, 38, 0.22) 35%,
+        transparent 70%);
+    filter: blur(60px);
+    animation: glow-drift-1 14s ease-in-out infinite;
+}
+.hero-glow-2 {
+    width: 500px; height: 500px;
+    bottom: -120px; right: -120px;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, transparent 65%);
+    filter: blur(50px);
+    animation: glow-drift-2 18s ease-in-out infinite;
+}
+.hero-glow-3 {
+    width: 400px; height: 400px;
+    bottom: 5%; left: -80px;
+    background: radial-gradient(circle, rgba(153, 27, 27, 0.45) 0%, transparent 70%);
+    filter: blur(50px);
+    animation: glow-drift-3 22s ease-in-out infinite;
+}
+@keyframes glow-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+    50%      { transform: translate(40px, 60px) scale(1.1); opacity: 1; }
+}
+@keyframes glow-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    50%      { transform: translate(-80px, -40px) scale(1.15); opacity: 1; }
+}
+@keyframes glow-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    50%      { transform: translate(60px, -30px) scale(1.2); opacity: 0.95; }
+}
+.hero-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 28px;
+    padding: 0 16px;
+}
+.hero-logo {
+    width: 104px; height: 104px; margin-bottom: 8px;
+    border-radius: 50%;
+    overflow: hidden;
+    filter: drop-shadow(0 8px 32px rgba(220, 38, 38, 0.18));
+}
+.hero-logo img { width: 100%; height: 100%; object-fit: contain; }
+@media (min-width: 768px) { .hero-logo { width: 128px; height: 128px; } }
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 12vw, 144px);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+}
+.hero-title span { display: block; }
+.hero-title .hero-title-sub {
+    font-weight: 300;
+    font-size: clamp(16px, 2.4vw, 24px);
+    line-height: 1;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 14px;
+    padding-left: 0.5em;
+}
+
+.hero-location {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    padding-left: 0.5em;
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: -4px;
+}
+.hero-location::before, .hero-location::after {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--color-text-dim);
+}
+
+.hero-ctas {
+    display: flex; flex-direction: column; gap: 12px;
+    width: 100%; max-width: 320px;
+    margin-top: 20px;
+}
+@media (min-width: 600px) {
+    .hero-ctas { flex-direction: row; max-width: none; justify-content: center; }
+}
+
+.hero-scroll-hint {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    animation: float 2.4s ease-in-out infinite;
+}
+.hero-scroll-hint::after {
+    content: '';
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, var(--color-text-dim), transparent);
+}
+@keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, 8px); }
+}
+@media (max-width: 599px) { .hero-scroll-hint { display: none; } }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section { padding: 64px 0; position: relative; }
+@media (min-width: 768px) { .section { padding: 96px 0; } }
+.section[id] { scroll-margin-top: 80px; }
+
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7.5vw, 80px);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+}
+.section-subtitle {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: 18px;
+    max-width: 540px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   EVENTOS
+   ============================================================ */
+.eventos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+@media (min-width: 720px) {
+    .eventos-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+}
+
+.event-card {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease,
+                border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card.is-visible { opacity: 1; transform: translateY(0); }
+.event-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-border-elevated);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.event-flyer {
+    position: relative;
+    aspect-ratio: 1 / 1.4;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 28px;
+}
+.event-flyer-image {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;        /* preserva el flyer entero — bandas en bg si no calza el aspect */
+    object-position: center;
+    z-index: 0;
+}
+/* Cuando hay flyer real, escondemos los overlays del placeholder
+   (texto + vignette) para que la imagen del artista se vea limpia. */
+.event-flyer:has(.event-flyer-image)::after,
+.event-flyer:has(.event-flyer-image) .event-flyer-top,
+.event-flyer:has(.event-flyer-image) .event-flyer-bottom {
+    display: none;
+}
+.event-flyer::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 30% 15%, rgba(255,255,255,0.10) 0%, transparent 45%),
+        radial-gradient(circle at 75% 90%, rgba(0,0,0,0.5) 0%, transparent 55%);
+    pointer-events: none;
+}
+.event-flyer-top {
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.94);
+    text-transform: uppercase;
+}
+.event-flyer-top .brand-mark {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+}
+.event-flyer-bottom { position: relative; z-index: 1; }
+.event-flyer-headliner {
+    font-family: var(--font-display);
+    color: #ffffff;
+    font-size: clamp(28px, 4.4vw, 44px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+.event-flyer-cycles {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    color: rgba(255, 255, 255, 0.72);
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.event-soldout-stripe {
+    position: absolute;
+    top: 28px; right: -52px;
+    transform: rotate(38deg);
+    background: var(--color-danger);
+    color: #fff;
+    padding: 6px 60px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Flyer placeholders — todos en paleta rojo + negro */
+.flyer-1 .event-flyer { background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%); }
+.flyer-2 .event-flyer { background: linear-gradient(180deg, #b91c1c 0%, #450a0a 60%, #000000 100%); }
+.flyer-3 .event-flyer { background: linear-gradient(135deg, #18181b 0%, #2a0a0a 55%, #000000 100%); }
+.flyer-4 .event-flyer { background: linear-gradient(160deg, #991b1b 0%, #000000 100%); }
+
+.event-body {
+    padding: 24px 28px 28px;
+    display: flex; flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+.event-date {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3.4vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+    line-height: 1;
+    display: inline-block;
+}
+.event-headliner {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.6vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin-top: 2px;
+}
+.event-supporting {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.event-cycles {
+    display: flex; flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+.event-cycle {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 5px 11px;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-pill);
+    color: var(--color-text);
+}
+.event-cta { margin-top: 18px; width: 100%; }
+
+/* ============================================================
+   LA EXPERIENCIA
+   ============================================================ */
+.experiencia { position: relative; overflow: hidden; }
+.experiencia::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(220, 38, 38, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+.experiencia > * { position: relative; }
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+@media (min-width: 900px) {
+    .pillars-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+.pillar {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 44px 36px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.pillar.is-visible { opacity: 1; transform: translateY(0); }
+.pillar:hover {
+    border-color: transparent;
+    box-shadow: 0 0 0 1px var(--color-primary) inset, var(--shadow-glow-primary);
+}
+.pillar-icon {
+    width: 56px; height: 56px;
+    margin-bottom: 28px;
+    color: var(--color-text);
+    transition: color 0.3s ease;
+}
+.pillar:hover .pillar-icon { color: var(--color-primary); }
+.pillar-title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+.pillar-text {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+/* Animaciones del slot */
+.pillar[data-pillar="sound"] .wave {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wave-pulse 1.6s ease-in-out infinite;
+}
+.pillar[data-pillar="sound"] .wave:nth-child(1) { animation-delay: 0s; }
+.pillar[data-pillar="sound"] .wave:nth-child(2) { animation-delay: 0.12s; }
+.pillar[data-pillar="sound"] .wave:nth-child(3) { animation-delay: 0.24s; }
+.pillar[data-pillar="sound"] .wave:nth-child(4) { animation-delay: 0.36s; }
+.pillar[data-pillar="sound"] .wave:nth-child(5) { animation-delay: 0.48s; }
+@keyframes wave-pulse {
+    0%, 100% { transform: scaleY(0.35); opacity: 0.6; }
+    50%      { transform: scaleY(1);    opacity: 1; }
+}
+
+/* Luces: ahora solo blanco → rojo (sin naranja) */
+.pillar[data-pillar="lights"] .beam {
+    animation: beam-color 4.5s ease-in-out infinite;
+}
+.pillar[data-pillar="lights"] .beam:nth-child(3) { animation-delay: -1.5s; }
+.pillar[data-pillar="lights"] .beam:nth-child(4) { animation-delay: -3s; }
+@keyframes beam-color {
+    0%, 100% { stroke: rgba(255, 255, 255, 0.92); }
+    50%      { stroke: rgba(220, 38, 38, 0.95); }
+}
+
+.pillar[data-pillar="screens"] .pixel {
+    animation: pixel-flicker 2.6s ease-in-out infinite;
+}
+.pillar[data-pillar="screens"] .pixel:nth-child(1) { animation-delay: 0s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(2) { animation-delay: 0.4s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(3) { animation-delay: 0.8s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(4) { animation-delay: 1.2s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(5) { animation-delay: 0.6s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(6) { animation-delay: 1.4s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(7) { animation-delay: 0.2s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(8) { animation-delay: 1.0s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(9) { animation-delay: 1.6s; }
+@keyframes pixel-flicker {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+}
+
+/* ============================================================
+   CÓMO LLEGAR
+   ============================================================ */
+.mapa {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 36px;
+    background: var(--color-bg-elevated);
+}
+@media (max-width: 599px) { .mapa { aspect-ratio: 4 / 5; } }
+.mapa iframe {
+    width: 100%; height: 100%;
+    border: 0;
+    display: block;
+    filter: invert(0.92) hue-rotate(180deg) saturate(0.4) contrast(1.05);
+}
+.ubicacion-info {
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+.ubicacion-direccion {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text);
+    max-width: 600px;
+}
+.ubicacion-link {
+    color: var(--color-text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center;
+    gap: 8px;
+    transition: color 0.2s, gap 0.25s;
+}
+.ubicacion-link:hover { color: var(--color-text); gap: 12px; }
+.ubicacion-link svg { width: 14px; height: 14px; }
+
+.chip-edad {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid var(--color-primary);
+    color: var(--color-text);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   REDES
+   ============================================================ */
+.redes-content {
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+.ig-button {
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: var(--color-text);
+    transition: transform 0.3s ease;
+}
+.ig-button:hover { transform: translateY(-3px); }
+.ig-icon-wrap {
+    width: 88px; height: 88px;
+    border-radius: 24px;
+    background: var(--color-primary);
+    display: flex; align-items: center; justify-content: center;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.ig-button:hover .ig-icon-wrap {
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-glow-primary);
+}
+.ig-icon-wrap svg { width: 42px; height: 42px; color: #fff; }
+.ig-handle {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    transition: color 0.3s;
+}
+.ig-button:hover .ig-handle { color: var(--color-primary); }
+.redes-mail {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+}
+.redes-mail:hover { color: var(--color-text); }
+
+/* ============================================================
+   FOOTER — compacto, horizontal en desktop
+   ============================================================ */
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    padding: 24px 0;
+}
+.footer-inner {
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+}
+.footer-brand {
+    display: inline-flex; align-items: center;
+    gap: 14px;
+}
+.footer-logo {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.footer-logo img { width: 100%; height: 100%; object-fit: contain; }
+.footer-line {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+.footer-copy {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--color-text-dim);
+    letter-spacing: 0.06em;
+}
+@media (min-width: 768px) {
+    .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
+    }
+}
+
+/* ============================================================
+   FILM GRAIN OVERLAY — premium tactile feel.
+   SVG fractal noise inline, mix-blend overlay, opacity baja.
+   ============================================================ */
+body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .event-card, .pillar { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header" id="header">
+    <div class="container header-inner">
+        <a class="brand" href="#hero" aria-label="Gotham Experience — inicio">
+            <span class="brand-logo" data-logo></span>
+        </a>
+        <nav class="nav-desktop" aria-label="Navegación principal">
+            <a href="#eventos">Eventos</a>
+            <a href="#experiencia">La Experiencia</a>
+            <a href="#ubicacion">Cómo llegar</a>
+            <a class="nav-ig" href="https://instagram.com/gotham.bariloche" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+            </a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="4" y1="8"  x2="20" y2="8"/>
+                <line x1="4" y1="16" x2="20" y2="16"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menú mobile">
+    <a href="#eventos">Eventos</a>
+    <a href="#experiencia">La Experiencia</a>
+    <a href="#ubicacion">Cómo llegar</a>
+    <a href="https://instagram.com/gotham.bariloche" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-logo" data-logo></div>
+        <h1 class="hero-title">
+            <span>Gotham</span>
+            <span class="hero-title-sub">Experience</span>
+        </h1>
+        <p class="hero-location">Bariloche</p>
+        <div class="hero-ctas">
+            <a class="btn btn-primary" href="#eventos">Ver próximos eventos</a>
+            <a class="btn btn-outline" href="https://www.passline.com" target="_blank" rel="noopener">Comprar entradas</a>
+        </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">Scroll</div>
+</section>
+
+<main>
+
+<section class="section eventos" id="eventos">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Próximos eventos</h2>
+            <p class="section-subtitle">Reservá tu lugar antes que se agote.</p>
+        </header>
+        <div class="eventos-grid" id="eventos-grid"></div>
+    </div>
+</section>
+
+<section class="section experiencia" id="experiencia">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">La experiencia</h2>
+            <p class="section-subtitle">Tres pilares que hacen de cada noche un evento.</p>
+        </header>
+        <div class="pillars-grid">
+            <article class="pillar" data-pillar="sound">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+                        <rect class="wave" x="6"  y="14" width="6" height="36" rx="2"/>
+                        <rect class="wave" x="18" y="14" width="6" height="36" rx="2"/>
+                        <rect class="wave" x="30" y="14" width="6" height="36" rx="2"/>
+                        <rect class="wave" x="42" y="14" width="6" height="36" rx="2"/>
+                        <rect class="wave" x="54" y="14" width="6" height="36" rx="2"/>
+                    </svg>
+                </div>
+                <h3 class="pillar-title">Sonido</h3>
+                <p class="pillar-text">Sistema line array de última generación. Cada frecuencia donde tiene que estar, sin distorsión, sin pérdida. La diferencia entre escuchar música y sentirla.</p>
+            </article>
+            <article class="pillar" data-pillar="lights">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="32" cy="11" r="5" fill="currentColor" stroke="none"/>
+                        <path class="beam" d="M32 17 L14 56"/>
+                        <path class="beam" d="M32 17 L32 58"/>
+                        <path class="beam" d="M32 17 L50 56"/>
+                    </svg>
+                </div>
+                <h3 class="pillar-title">Luces</h3>
+                <p class="pillar-text">Cabezas móviles, lasers y mapping sincronizado a cada track. Iluminación que no acompaña la música: la traduce.</p>
+            </article>
+            <article class="pillar" data-pillar="screens">
+                <div class="pillar-icon">
+                    <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+                        <rect class="pixel" x="6"  y="6"  width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="26" y="6"  width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="46" y="6"  width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="6"  y="26" width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="26" y="26" width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="46" y="26" width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="6"  y="46" width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="26" y="46" width="16" height="16" rx="2"/>
+                        <rect class="pixel" x="46" y="46" width="16" height="16" rx="2"/>
+                    </svg>
+                </div>
+                <h3 class="pillar-title">Pantallas</h3>
+                <p class="pillar-text">Paredes LED de alta densidad con visuales en 4K, generados en vivo o curados por cada artista. La pista de baile como obra audiovisual.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section ubicacion" id="ubicacion">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Cómo llegar</h2>
+        </header>
+        <div class="mapa">
+            <iframe
+                src="https://maps.google.com/maps?q=Elflein%20149%20Bariloche&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Mapa de Gotham Experience — Elflein 149, Bariloche"></iframe>
+        </div>
+        <div class="ubicacion-info">
+            <p class="ubicacion-direccion">Elflein 149, San Carlos de Bariloche, Río Negro</p>
+            <a class="ubicacion-link" href="https://www.google.com/maps/search/?api=1&query=Elflein%20149%20Bariloche" target="_blank" rel="noopener">
+                Abrir en Google Maps
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7M9 7h8v8"/>
+                </svg>
+            </a>
+            <span class="chip-edad">+21 años</span>
+        </div>
+    </div>
+</section>
+
+<section class="section redes" id="redes">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Seguinos</h2>
+        </header>
+        <div class="redes-content">
+            <a class="ig-button" href="https://instagram.com/gotham.bariloche" target="_blank" rel="noopener" aria-label="Instagram @gotham.bariloche">
+                <span class="ig-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </span>
+                <span class="ig-handle">@gotham.bariloche</span>
+            </a>
+            <a class="redes-mail" href="mailto:experiencegotham@gmail.com">experiencegotham@gmail.com</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div class="footer-brand">
+            <span class="footer-logo" data-logo></span>
+            <span class="footer-line">Gotham Experience · Bariloche · +21</span>
+        </div>
+        <p class="footer-copy">© 2026 Gotham Experience</p>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    var LOGO_IMG_URL = 'tenants/gotham/branding/logo.png';
+
+    /* SVG fallback — sin gradient ring de colores. Negro + reflejo lunar blanco. */
+    function logoSvg(id) {
+        return ''
+            + '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gotham Experience">'
+            +   '<circle cx="40" cy="40" r="38" fill="#0a0a0a" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>'
+            +   '<path d="M 14 32 A 30 30 0 0 1 36 12" stroke="rgba(255,255,255,0.45)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.7"/>'
+            +   '<text x="40" y="40" text-anchor="middle" fill="#ffffff" font-family="Manrope, system-ui, sans-serif" font-weight="700" font-size="11" letter-spacing="0.5">GOTHAM</text>'
+            +   '<text x="40" y="52" text-anchor="middle" fill="#ffffff" font-family="Manrope, system-ui, sans-serif" font-weight="300" font-size="4.5" letter-spacing="2.2">EXPERIENCE</text>'
+            + '</svg>';
+    }
+
+    /* Probar la imagen una sola vez. Si carga → usa <img>. Si falla → usa SVG. */
+    function injectLogo() {
+        var probe = new Image();
+        probe.onload = function () {
+            document.querySelectorAll('[data-logo]').forEach(function (el) {
+                el.innerHTML = '<img src="' + LOGO_IMG_URL + '" alt="Gotham Experience">';
+            });
+        };
+        probe.onerror = function () {
+            document.querySelectorAll('[data-logo]').forEach(function (el, i) {
+                el.innerHTML = logoSvg('l' + i);
+            });
+        };
+        probe.src = LOGO_IMG_URL;
+    }
+    injectLogo();
+
+    /* EVENTOS MOCK */
+    var EVENTS = [
+        { flyer: 1, label: 'SÁB 16.05', headliner: 'Fernanda Pistelli',   supporting: '',             cycles: ['Gotham + Ciclic'], soldOut: false, ticket: 'https://www.passline.com', img: 'tenants/gotham/branding/flyers/evt-001.jpg' },
+        { flyer: 2, label: 'DOM 31.05', headliner: 'Fiesta de Hitazos',   supporting: '',             cycles: [],                  soldOut: false, ticket: 'https://www.passline.com', img: 'tenants/gotham/branding/flyers/evt-002.jpg' },
+        { flyer: 3, label: 'SÁB 06.06', headliner: 'Gotham × MTN × TSOM', supporting: 'Press. Zisko', cycles: [],                  soldOut: false, ticket: 'https://www.passline.com', img: 'tenants/gotham/branding/flyers/evt-003.jpg' },
+        { flyer: 4, label: 'SÁB 13.06', headliner: 'D-Nox',               supporting: '',             cycles: ['Gotham + Ciclic'], soldOut: false, ticket: 'https://www.passline.com', img: 'tenants/gotham/branding/flyers/evt-004.jpg' }
+    ];
+
+    function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+            return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+        });
+    }
+
+    function renderEvent(e) {
+        var cyclesBody = e.cycles.length
+            ? '<div class="event-cycles">' + e.cycles.map(function (c) { return '<span class="event-cycle">' + esc(c) + '</span>'; }).join('') + '</div>'
+            : '';
+        var cyclesFlyer = e.cycles.length
+            ? '<div class="event-flyer-cycles">' + e.cycles.map(esc).join(' · ') + '</div>'
+            : '';
+        var supporting = e.supporting ? '<p class="event-supporting">' + esc(e.supporting) + '</p>' : '';
+        var ctaLabel = e.soldOut ? 'Sold Out' : 'Comprar entradas';
+        var ctaClass = e.soldOut ? 'btn-disabled' : 'btn-primary';
+        var ctaAttrs = e.soldOut
+            ? 'href="#" tabindex="-1" aria-disabled="true"'
+            : 'href="' + esc(e.ticket) + '" target="_blank" rel="noopener"';
+        var soldoutStripe = e.soldOut ? '<span class="event-soldout-stripe">Sold Out</span>' : '';
+        var flyerImg = e.img
+            ? '<img class="event-flyer-image" src="' + esc(e.img) + '" alt="Flyer ' + esc(e.headliner) + '" loading="lazy">'
+            : '';
+
+        return ''
+            + '<article class="event-card flyer-' + e.flyer + '">'
+            +   '<div class="event-flyer">'
+            +       flyerImg
+            +       soldoutStripe
+            +       '<div class="event-flyer-top">'
+            +           '<span>' + esc(e.label) + '</span>'
+            +           '<span class="brand-mark" aria-hidden="true"></span>'
+            +       '</div>'
+            +       '<div class="event-flyer-bottom">'
+            +           '<div class="event-flyer-headliner">' + esc(e.headliner) + '</div>'
+            +           cyclesFlyer
+            +       '</div>'
+            +   '</div>'
+            +   '<div class="event-body">'
+            +       '<span class="event-date">' + esc(e.label) + '</span>'
+            +       '<h3 class="event-headliner">' + esc(e.headliner) + '</h3>'
+            +       supporting
+            +       cyclesBody
+            +       '<a class="btn ' + ctaClass + ' event-cta" ' + ctaAttrs + '>' + ctaLabel + '</a>'
+            +   '</div>'
+            + '</article>';
+    }
+
+    document.getElementById('eventos-grid').innerHTML = EVENTS.map(renderEvent).join('');
+
+    // Si el flyer image 404ea, sacarlo para que se vea el gradient placeholder.
+    document.querySelectorAll('.event-flyer-image').forEach(function (img) {
+        img.addEventListener('error', function () { img.remove(); }, { once: true });
+    });
+
+    /* Header scroll */
+    var header = document.getElementById('header');
+    function onScroll() {
+        if (window.scrollY > 24) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Mobile menu */
+    var navToggle  = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    navToggle.addEventListener('click', function () {
+        var open = mobileMenu.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+            mobileMenu.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Abrir menú');
+            document.body.style.overflow = '';
+        });
+    });
+
+    /* IntersectionObservers */
+    if ('IntersectionObserver' in window) {
+        var pillarObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.pillar').forEach(function (p, i) {
+                        setTimeout(function () { p.classList.add('is-visible'); }, i * 130);
+                    });
+                    pillarObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.2 });
+        var expSection = document.querySelector('.experiencia');
+        if (expSection) pillarObserver.observe(expSection);
+
+        var cardObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.event-card').forEach(function (c) { cardObserver.observe(c); });
+    } else {
+        document.querySelectorAll('.event-card, .pillar').forEach(function (el) { el.classList.add('is-visible'); });
+    }
+})();
+</script>
+
+</body>
+</html>

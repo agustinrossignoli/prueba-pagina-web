@@ -1,0 +1,30 @@
+# Normalización de line endings: LF en el repo, los checkouts en Windows
+# pueden mantener CRTF si tienen core.autocrlf=true en su git config.
+* text=auto eol=lf
+
+# Texto explícito
+*.html  text
+*.css   text
+*.js    text
+*.json  text
+*.md    text
+*.svg   text
+*.rules text
+
+# Binarios
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.avif  binary
+*.mp4   binary
+*.webm  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.pdf   binary
+*.zip   binary

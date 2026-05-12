@@ -1,0 +1,63 @@
+/* theme.css — Gotham Experience
+   Paleta rojo + negro. Override de tokens neutrales en /core/styles/tokens.css. */
+
+:root {
+    /* Negro pleno para matchear el fondo del logo (era #0a0a0a) */
+    --color-bg: #000000;
+    --color-bg-elevated: #121212;
+
+    --color-primary: #dc2626;          /* red-600 — brand red de los flyers */
+    --color-primary-hover: #ef4444;    /* red-500 — hover */
+    --color-primary-deep: #991b1b;     /* red-800 — depth */
+    --color-accent: #dc2626;
+    --color-accent-hover: #ef4444;
+
+    --gradient-brand: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+
+    --shadow-glow-primary: 0 0 32px rgba(220, 38, 38, 0.5);
+
+    --font-display: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body:    'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hero glows — todos en tonalidades de rojo */
+.hero-glow-1 {
+    top: 50%; left: 50%; margin-left: -450px; margin-top: -340px;
+    background: radial-gradient(ellipse,
+        rgba(220, 38, 38, 0.55) 0%,
+        rgba(220, 38, 38, 0.22) 35%,
+        transparent 70%);
+}
+.hero-glow-2 {
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, transparent 65%);
+}
+.hero-glow-3 {
+    background: radial-gradient(circle, rgba(153, 27, 27, 0.45) 0%, transparent 70%);
+}
+
+/* Chip edad */
+.chip-edad {
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid var(--color-primary);
+}
+
+/* Slot custom "LA EXPERIENCIA" — overlay sutil rojo desde arriba */
+#experiencia::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(220, 38, 38, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+#experiencia > * { position: relative; }
+
+/* Film grain overlay — premium tactile feel.
+   SVG fractal noise inline (sin asset externo), mix-blend overlay sutil. */
+body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+}

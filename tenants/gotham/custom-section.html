@@ -1,0 +1,104 @@
+<!-- Slot custom: LA EXPERIENCIA — Gotham
+     Tres pilares (sonido, luces, pantallas) con SVG animados.
+     Estilos base de .pillar / .pillars-grid vienen de core/styles/components.css.
+     El overlay de fondo del slot vive en tenants/gotham/theme.css (#experiencia::before). -->
+
+<div class="container">
+    <header class="section-header">
+        <h2 class="section-title">La experiencia</h2>
+        <p class="section-subtitle">Tres pilares que hacen de cada noche un evento.</p>
+    </header>
+
+    <div class="pillars-grid">
+        <article class="pillar" data-pillar="sound">
+            <div class="pillar-icon">
+                <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+                    <rect class="wave" x="6"  y="14" width="6" height="36" rx="2"/>
+                    <rect class="wave" x="18" y="14" width="6" height="36" rx="2"/>
+                    <rect class="wave" x="30" y="14" width="6" height="36" rx="2"/>
+                    <rect class="wave" x="42" y="14" width="6" height="36" rx="2"/>
+                    <rect class="wave" x="54" y="14" width="6" height="36" rx="2"/>
+                </svg>
+            </div>
+            <h3 class="pillar-title">Sonido</h3>
+            <p class="pillar-text">Sistema line array de última generación. Cada frecuencia donde tiene que estar, sin distorsión, sin pérdida. La diferencia entre escuchar música y sentirla.</p>
+        </article>
+
+        <article class="pillar" data-pillar="lights">
+            <div class="pillar-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                    <circle cx="32" cy="11" r="5" fill="currentColor" stroke="none"/>
+                    <path class="beam" d="M32 17 L14 56"/>
+                    <path class="beam" d="M32 17 L32 58"/>
+                    <path class="beam" d="M32 17 L50 56"/>
+                </svg>
+            </div>
+            <h3 class="pillar-title">Luces</h3>
+            <p class="pillar-text">Cabezas móviles, lasers y mapping sincronizado a cada track. Iluminación que no acompaña la música: la traduce.</p>
+        </article>
+
+        <article class="pillar" data-pillar="screens">
+            <div class="pillar-icon">
+                <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+                    <rect class="pixel" x="6"  y="6"  width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="26" y="6"  width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="46" y="6"  width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="6"  y="26" width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="26" y="26" width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="46" y="26" width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="6"  y="46" width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="26" y="46" width="16" height="16" rx="2"/>
+                    <rect class="pixel" x="46" y="46" width="16" height="16" rx="2"/>
+                </svg>
+            </div>
+            <h3 class="pillar-title">Pantallas</h3>
+            <p class="pillar-text">Paredes LED de alta densidad con visuales en 4K, generados en vivo o curados por cada artista. La pista de baile como obra audiovisual.</p>
+        </article>
+    </div>
+</div>
+
+<style>
+/* Animaciones específicas del slot custom de Gotham */
+
+.pillar[data-pillar="sound"] .wave {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wave-pulse 1.6s ease-in-out infinite;
+}
+.pillar[data-pillar="sound"] .wave:nth-child(1) { animation-delay: 0s; }
+.pillar[data-pillar="sound"] .wave:nth-child(2) { animation-delay: 0.12s; }
+.pillar[data-pillar="sound"] .wave:nth-child(3) { animation-delay: 0.24s; }
+.pillar[data-pillar="sound"] .wave:nth-child(4) { animation-delay: 0.36s; }
+.pillar[data-pillar="sound"] .wave:nth-child(5) { animation-delay: 0.48s; }
+@keyframes wave-pulse {
+    0%, 100% { transform: scaleY(0.35); opacity: 0.6; }
+    50%      { transform: scaleY(1);    opacity: 1; }
+}
+
+.pillar[data-pillar="lights"] .beam {
+    animation: beam-color 4.5s ease-in-out infinite;
+}
+.pillar[data-pillar="lights"] .beam:nth-child(3) { animation-delay: -1.5s; }
+.pillar[data-pillar="lights"] .beam:nth-child(4) { animation-delay: -3s; }
+@keyframes beam-color {
+    0%, 100% { stroke: rgba(255, 255, 255, 0.92); }
+    50%      { stroke: rgba(220, 38, 38, 0.95); }
+}
+
+.pillar[data-pillar="screens"] .pixel {
+    animation: pixel-flicker 2.6s ease-in-out infinite;
+}
+.pillar[data-pillar="screens"] .pixel:nth-child(1) { animation-delay: 0s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(2) { animation-delay: 0.4s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(3) { animation-delay: 0.8s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(4) { animation-delay: 1.2s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(5) { animation-delay: 0.6s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(6) { animation-delay: 1.4s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(7) { animation-delay: 0.2s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(8) { animation-delay: 1.0s; }
+.pillar[data-pillar="screens"] .pixel:nth-child(9) { animation-delay: 1.6s; }
+@keyframes pixel-flicker {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+}
+</style>

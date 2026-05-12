@@ -1,0 +1,32 @@
+{
+    "brand": {
+        "line1": "Nombre",
+        "line2": "Sub-nombre",
+        "location": "Ciudad",
+        "description": "Descripción corta para meta tag.",
+        "themeColor": "#0a0a0a",
+        "googleFonts": "https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700&display=swap",
+        "customSectionLabel": "La Experiencia",
+        "logoColors": ["#888888", "#aaaaaa", "#cccccc"],
+        "logoBg": "#0a0a0a",
+        "logoLine1": "BRAND",
+        "logoLine2": "TAGLINE"
+    },
+    "location": {
+        "address": "Calle 123, Ciudad, Provincia",
+        "embedMapUrl": "https://maps.google.com/maps?q=...&output=embed",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=...",
+        "ageRestriction": "+18 años"
+    },
+    "social": {
+        "instagramHandle": "@handle",
+        "instagramUrl": "https://instagram.com/handle",
+        "email": "contacto@cliente.com",
+        "ticketsUrl": "https://www.passline.com"
+    },
+    "footer": {
+        "line": "BRAND · Ciudad · +18",
+        "copyright": "© 2026 Brand. Todos los derechos reservados."
+    },
+    "events": []
+}

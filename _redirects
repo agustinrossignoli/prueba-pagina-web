@@ -1,0 +1,7 @@
+# Cloudflare Pages routing — rewrites para que las URLs limpias mapeen
+# a los entry points dentro de core/public/. Status 200 = rewrite (no redirect):
+# el browser ve la URL original, el server sirve el archivo destino.
+
+/         /core/public/index.html        200
+/admin    /core/public/admin/index.html  200
+/admin/   /core/public/admin/index.html  200

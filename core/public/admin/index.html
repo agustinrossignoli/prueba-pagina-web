@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · Clubsites</title>
+<link rel="stylesheet" href="/core/styles/tokens.css">
+<link rel="stylesheet" href="/core/styles/base.css">
+<style>
+    .admin-soon {
+        min-height: 100vh;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        text-align: center;
+        padding: 24px;
+        gap: 16px;
+    }
+    .admin-soon h1 {
+        font-family: 'Manrope', system-ui, sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+    .admin-soon p {
+        color: var(--color-text-muted);
+        max-width: 480px;
+        font-family: 'Manrope', system-ui, sans-serif;
+    }
+    .admin-soon code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+        background: var(--color-bg-elevated);
+        border: 1px solid var(--color-border);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+    .admin-soon a {
+        color: var(--color-text-muted);
+        font-size: 13px;
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<main class="admin-soon">
+    <h1>Panel admin · en construcción</h1>
+    <p>Esta pantalla queda lista para la fase 2: login con Firebase Auth, CRUD de eventos, edición de contenido y configuración del tenant.</p>
+    <p>Mientras tanto, los eventos del tenant se editan a mano en <code>tenants/{tenantId}/content.json</code>.</p>
+    <a href="/core/public/">← Volver al sitio público</a>
+</main>
+</body>
+</html>

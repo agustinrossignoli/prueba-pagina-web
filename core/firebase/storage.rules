@@ -1,0 +1,26 @@
+rules_version = '2';
+
+// Storage rules: assets de tenant son lectura pública, escritura solo del admin del tenant.
+
+service firebase.storage {
+    match /b/{bucket}/o {
+
+        match /tenants/{tenantId}/{allPaths=**} {
+            allow read: if true;
+            allow write: if request.auth != null && (
+                request.auth.token.operator == true ||
+                request.auth.token.tenantId == tenantId
+            );
+
+            // Límite de tamaño: 5MB por archivo (flyers tipo Instagram story).
+            // Tipos permitidos: imágenes.
+            allow create: if request.resource.size < 5 * 1024 * 1024
+                && request.resource.contentType.matches('image/.*');
+        }
+
+        // Catch-all
+        match /{allPaths=**} {
+            allow read, write: if false;
+        }
+    }
+}

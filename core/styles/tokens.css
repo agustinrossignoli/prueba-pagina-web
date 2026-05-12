@@ -1,0 +1,48 @@
+/* tokens.css — Variables CSS por defecto del sistema Clubsites.
+   Cada tenant override en /tenants/{tenantId}/theme.css. */
+
+:root {
+    /* Backgrounds */
+    --color-bg: #0a0a0a;
+    --color-bg-elevated: #141414;
+    --color-bg-input: #1a1a1a;
+
+    /* Text */
+    --color-text: #ffffff;
+    --color-text-muted: #a3a3a3;
+    --color-text-dim: #6b6b6b;
+
+    /* Brand defaults — neutros. Cada tenant los pisa. */
+    --color-primary: #888888;
+    --color-primary-hover: #a3a3a3;
+    --color-primary-deep: #666666;
+    --color-accent: #888888;
+    --color-accent-hover: #a3a3a3;
+
+    --gradient-brand: linear-gradient(135deg, #888 0%, #ccc 100%);
+    --gradient-brand-radial: radial-gradient(circle, #888 0%, #ccc 50%, transparent 100%);
+
+    /* Estado / utilidad */
+    --color-danger: #dc2626;
+    --color-success: #16a34a;
+    --color-border: #262626;
+    --color-border-elevated: #404040;
+
+    /* Glow */
+    --shadow-glow-primary: 0 0 32px rgba(255, 255, 255, 0.15);
+    --shadow-glow-accent:  0 0 32px rgba(255, 255, 255, 0.15);
+
+    /* Fonts — default Manrope (fallback system-ui si no se carga). */
+    --font-display: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body:    'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 999px;
+
+    /* Layout */
+    --header-h: 72px;
+    --container-max: 1200px;
+}

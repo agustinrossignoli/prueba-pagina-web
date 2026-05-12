@@ -1,0 +1,25 @@
+/* theme.css — Override de tokens del tenant.
+   Solo redefiní lo que cambia respecto a /core/styles/tokens.css. */
+
+:root {
+    /* --color-primary: #...; */
+    /* --color-primary-hover: #...; */
+    /* --color-accent: #...; */
+    /* --color-accent-hover: #...; */
+
+    /* --gradient-brand: linear-gradient(135deg, #... 0%, #... 100%); */
+    /* --gradient-brand-radial: radial-gradient(circle, #... 0%, #... 50%, transparent 100%); */
+
+    /* --shadow-glow-primary: 0 0 32px rgba(..., 0.45); */
+    /* --shadow-glow-accent:  0 0 32px rgba(..., 0.45); */
+
+    /* --font-display: '...', sans-serif; */
+    /* --font-body:    '...', system-ui, sans-serif; */
+}
+
+/* Hero glows (backgrounds específicos del brand) — opcional */
+/*
+.hero-glow-1 { background: radial-gradient(...); }
+.hero-glow-2 { background: radial-gradient(...); }
+.hero-glow-3 { background: radial-gradient(...); }
+*/

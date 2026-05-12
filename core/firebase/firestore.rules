@@ -1,0 +1,68 @@
+rules_version = '2';
+
+// Multi-tenant rules para Clubsites.
+// Modelo: /tenants/{tenantId}/{info, events, content, admins}.
+// Permisos vía custom claims en Firebase Auth:
+//   - claim "operator" = true → operador (Agustín). Puede todo.
+//   - claim "tenantId" = "{id}" → admin de un tenant. Puede CRUD dentro.
+// Lectura: pública para info, content y events no archivados.
+
+service cloud.firestore {
+    match /databases/{database}/documents {
+
+        // ===== /tenants/{tenantId} (doc raíz) =====
+        match /tenants/{tenantId} {
+            allow read: if true;
+            allow create, update, delete: if isOperator();
+
+            // ===== Subcolección: events =====
+            match /events/{eventId} {
+                allow read: if resource == null
+                    || resource.data.archived == false
+                    || isAdminOfTenant(tenantId);
+                allow create, update, delete: if isAdminOfTenant(tenantId);
+            }
+
+            // ===== Subcolección: content (textos editables) =====
+            match /content/{sectionId} {
+                allow read: if true;
+                allow create, update, delete: if isAdminOfTenant(tenantId);
+            }
+
+            // ===== Subcolección: admins =====
+            match /admins/{userId} {
+                allow read: if isAdminOfTenant(tenantId);
+                allow create, update, delete: if isOperator();
+            }
+        }
+
+        // ===== /global/* (solo operador) =====
+        match /global/domains-map/{domain} {
+            allow read: if true;
+            allow write: if isOperator();
+        }
+        match /global/billing/{tenantId} {
+            allow read:  if isAdminOfTenant(tenantId) || isOperator();
+            allow write: if isOperator();
+        }
+
+        // ===== Catch-all: nada más se lee/escribe =====
+        match /{document=**} {
+            allow read, write: if false;
+        }
+
+        // ===== Helpers =====
+        function isAuthed() {
+            return request.auth != null;
+        }
+        function isOperator() {
+            return isAuthed() && request.auth.token.operator == true;
+        }
+        function isAdminOfTenant(tenantId) {
+            return isAuthed() && (
+                request.auth.token.operator == true ||
+                request.auth.token.tenantId == tenantId
+            );
+        }
+    }
+}

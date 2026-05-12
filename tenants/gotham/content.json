@@ -1,0 +1,84 @@
+{
+    "brand": {
+        "line1": "Gotham",
+        "line2": "Experience",
+        "location": "Bariloche",
+        "description": "Gotham Experience: experiencias electrónicas premium en Bariloche.",
+        "themeColor": "#000000",
+        "googleFonts": "https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap",
+        "customSectionLabel": "La Experiencia",
+        "logoUrl": "/tenants/gotham/branding/logo.png",
+        "logoLine1": "GOTHAM",
+        "logoLine2": "EXPERIENCE"
+    },
+    "location": {
+        "address": "Elflein 149, San Carlos de Bariloche, Río Negro",
+        "embedMapUrl": "https://maps.google.com/maps?q=Elflein%20149%20Bariloche&t=&z=16&ie=UTF8&iwloc=&output=embed",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Elflein%20149%20Bariloche",
+        "ageRestriction": "+21 años"
+    },
+    "social": {
+        "instagramHandle": "@gotham.bariloche",
+        "instagramUrl": "https://instagram.com/gotham.bariloche",
+        "email": "experiencegotham@gmail.com",
+        "ticketsUrl": "https://www.passline.com"
+    },
+    "footer": {
+        "line": "Gotham Experience · Bariloche · +21",
+        "copyright": "© 2026 Gotham Experience"
+    },
+    "events": [
+        {
+            "id": "evt-001",
+            "dateLabel": "SÁB 16.05",
+            "dateIso": "2026-05-16",
+            "headliner": "Fernanda Pistelli",
+            "supporting": "",
+            "cycles": ["Gotham + Ciclic"],
+            "soldOut": false,
+            "archived": false,
+            "ticketUrl": "https://www.passline.com",
+            "flyerUrl": "/tenants/gotham/branding/flyers/evt-001.jpg",
+            "flyerGradient": "linear-gradient(135deg, #ef4444 0%, #991b1b 100%)"
+        },
+        {
+            "id": "evt-002",
+            "dateLabel": "DOM 31.05",
+            "dateIso": "2026-05-31",
+            "headliner": "Fiesta de Hitazos",
+            "supporting": "",
+            "cycles": [],
+            "soldOut": false,
+            "archived": false,
+            "ticketUrl": "https://www.passline.com",
+            "flyerUrl": "/tenants/gotham/branding/flyers/evt-002.jpg",
+            "flyerGradient": "linear-gradient(180deg, #b91c1c 0%, #450a0a 60%, #000000 100%)"
+        },
+        {
+            "id": "evt-003",
+            "dateLabel": "SÁB 06.06",
+            "dateIso": "2026-06-06",
+            "headliner": "Gotham × MTN × TSOM",
+            "supporting": "Press. Zisko",
+            "cycles": [],
+            "soldOut": false,
+            "archived": false,
+            "ticketUrl": "https://www.passline.com",
+            "flyerUrl": "/tenants/gotham/branding/flyers/evt-003.jpg",
+            "flyerGradient": "linear-gradient(135deg, #18181b 0%, #2a0a0a 55%, #000000 100%)"
+        },
+        {
+            "id": "evt-004",
+            "dateLabel": "SÁB 13.06",
+            "dateIso": "2026-06-13",
+            "headliner": "D-Nox",
+            "supporting": "",
+            "cycles": ["Gotham + Ciclic"],
+            "soldOut": false,
+            "archived": false,
+            "ticketUrl": "https://www.passline.com",
+            "flyerUrl": "/tenants/gotham/branding/flyers/evt-004.jpg",
+            "flyerGradient": "linear-gradient(160deg, #991b1b 0%, #000000 100%)"
+        }
+    ]
+}
